@@ -96,22 +96,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .modalDiv {
     height: 500px;
     width: 500px;
@@ -122,6 +106,7 @@ body {
     top: 47px;
     left: 435px;
     position: absolute;
+    visibility: visible;
 }
 
 .modalBoardName {
@@ -130,6 +115,11 @@ body {
     display: inherit;
     text-align: center;
     /* margin-top: 98px; */
+}
+.show-modalBoard {
+	opacity: 0;
+    /* visibility: hidden; */
+    display:none;
 }
 
 .list {
@@ -194,4 +184,19 @@ body {
     background-color: beige;
     color: #3a4ec4;
     margin-top: 3px;
+}
+
+.closeButton
+{
+    position: relative;
+    float: right;
+    background-color: #04043b;
+    color: white;
+    font-size: 27px;
+    right: 19px;
+    top: 6px;
+}
+.closeButton:hover{
+    box-shadow:0 0 5px grey;
+    cursor:pointer;
 }
