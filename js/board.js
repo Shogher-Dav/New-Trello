@@ -6,7 +6,7 @@ window.onload = function() {
 
     let modalBoard=document.querySelector(".modalBoard");// modal for Boards name
     let triggerBoard = document.querySelector(".triggerBoard");// My Boards button
-    let closeButton=document.querySelector(".closeButton");// closeButton
+  //  let closeButton=document.querySelector(".closeButton");// closeButton
 
     function toggleModal() {
         modal.classList.toggle("show-modal");
@@ -19,13 +19,22 @@ window.onload = function() {
         if (event.target === modal) {
             toggleModal();
         }
+        else if(event.target === modalBoard)
+        {
+            toggleBoardModal();
+        }
     }
 
     trigger.addEventListener("click", toggleModal);
-    window.addEventListener("click", windowOnClick);
+   
     createBoard.addEventListener("click", toggleModal);
+
     triggerBoard.addEventListener("click",toggleBoardModal);
-    closeButton.addEventListener("click",toggleBoardModal);
+    window.addEventListener("click", windowOnClick);
+   // closeButton.addEventListener("click",toggleBoardModal);  //Close Buttonnery petqa amen texic hanel css ban
+
+   // create Border-i css-y uxxel a petq texy pocxel
+   //Border moduli css responsive chi etel a petqa poxel 
     myBoards();
 }
 
