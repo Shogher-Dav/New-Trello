@@ -3,6 +3,7 @@ window.onload = function() {
     let modal = document.querySelector(".modal");
     let trigger = document.querySelector(".trigger");
     let createBoard = document.querySelector(".createBoard");
+
     let modalBoard=document.querySelector(".modalBoard");// modal for Boards name
     let triggerBoard = document.querySelector(".triggerBoard");// My Boards button
     let closeButton=document.querySelector(".closeButton");// closeButton
@@ -44,7 +45,6 @@ function createBoard() {
 function myFunction() {
     var param = event.currentTarget.text;
     window.location = 'file:///C:/Users/User/Desktop/trello/main.html?Board-Name=' + param;
-    // window.location = 'main.js' + param;
 
 
 }
