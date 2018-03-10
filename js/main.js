@@ -16,6 +16,16 @@ class Creat {
     }
     span(textSpan) {
         this.el.appendChild(document.createTextNode(textSpan));
+
+    
+    }
+    tickMethod(){
+
+       function x(){
+         this.el.classList.toggle("tick1");
+ }
+  this.el.addEventListener('click',x.bind(this));
+    
     }
 }
 
@@ -38,7 +48,10 @@ function read() {
         openCreateBox();
         for (let j = 0; j < obj['addList' + i].length; j++) {
             let task = new Creat("SPAN", 'list-text', '', "addList" + i);
-            task.span(obj['addList' + i][j]);
+            let tick=new Creat('img','tick','',  "addList" + i);
+            task.span(obj['addList' + i][j]);     
+            tick.tickMethod();  
+           
         }
     }
 }
@@ -50,7 +63,8 @@ function openCreateBox() {
     count++;
     //addList
     var list = new Creat("DIV", "addList", count, id);
-    id = list.id
+    id = list.id;
+       
 
     var input = new Creat("INPUT", 'addInput', count, id);
     input.input('text');
@@ -60,6 +74,7 @@ function openCreateBox() {
 
     var delBtn = new Creat("BUTTON", 'btnDelete', count, id);
     delBtn.button("onclick", "delete(id)", 'x');
+
 }
 
 
@@ -69,9 +84,12 @@ function save(id) {
     let inputText = document.getElementById(inputTextId).value;
     let addListId = 'addList' + idNum;
     let task = new Creat("SPAN", 'list-text', '', addListId);
-    task.span(inputText)
+    let tick=new Creat("img",'tick',"",addListId);
+    task.span(inputText,tick);
+  
 
-
+   tick.tickMethod();
+ 
     //set in localStorage
     let obj = JSON.parse(localStorage.getItem(boardName));
     if (obj.hasOwnProperty(addListId)) {
@@ -84,4 +102,38 @@ function save(id) {
         obj['length'] += 1;
         localStorage.setItem(boardName, JSON.stringify(obj));
     }
+   
+  
+    //  var text=document.querySelectorAll('.list-text');
+    // var list=document.querySelectorAll('.addList');
+    // console.log(text);
+    //   dragAndDrop(text,list);
+  
 }
+
+// function dragAndDrop(classTask,classList){
+
+//     function allowDrop(ev) {
+//         ev.preventDefault();
+//     }
+    
+//     function drag(ev) {
+//         ev.dataTransfer.setData("text", ev.target.id);
+//     }
+   
+//     function drop(ev) {
+//         ev.preventDefault();
+//         var data = ev.dataTransfer.getData("text");
+//         ev.target.appendChild(document.getElementById(data));
+//     }
+//   [].forEach.call(classTask, function(col) {
+//     col.setAttribute('draggable','true');
+//     col.setAttribute('ondragstart',"drag(event)");
+//  });
+//   [].forEach.call(classList, function(col) {
+//     col.setAttribute('ondragover','allowDrop(event)');
+//     col.setAttribute('ondrop',"drop(event)");
+   
+//   });
+// }
+
