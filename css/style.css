@@ -9,7 +9,7 @@ body {
 }
 
 .main-rigth {
-    background-image: url(clock.jpg);
+    background-image: url(images/clock.jpg);
     background-repeat: no-repeat;
     width: 797px;
     height: 600px;
@@ -186,23 +186,9 @@ body {
     margin-top: 3px;
 }
 
-.closeButton
-{
-    position: relative;
-    float: right;
-    background-color: #04043b;
-    color: white;
-    font-size: 27px;
-    right: 19px;
-    top: 6px;
-}
-.closeButton:hover{
-    box-shadow:0 0 5px grey;
-    cursor:pointer;
-}
 .tick
 {
-    content: url('tick.png');
+    content: url('images/tick.png');
     /* background-image:url('tick.png'); */
     /* background:url('tick.png'); */
     position:relative;
@@ -210,16 +196,20 @@ body {
     width:30px;
     height:30px;
     cursor: pointer;
-    margin-top: -30px;
+    margin-top: -27px;
 }
 
 .tick1{
-content:url('greenTick.png');
+content:url('images/greenTick.png');
 /* position:relative; */
-margin-top: -30px;
+margin-top: -27px;
 float:right; 
 width:30px;
 height:30px;
 cursor: pointer;
 
+}
+.garbage{
+    content:url('images/garbage.png');
+ 
 }
