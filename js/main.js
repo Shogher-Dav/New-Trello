@@ -44,28 +44,49 @@ function getParam() {
 function read() {
     let obj = JSON.parse(localStorage.getItem(boardName));
     let length = obj['length'];
+   
     for (let i = 1; i <= length; i++) {
         openCreateBox();
         for (let j = 0; j < obj['addList' + i].length; j++) {
             let task = new Create("SPAN", 'list-text', '', "addList" + i);
             let tick=new Create('img','tick','',  "addList" + i);
-            let garbage=new Create('image','garbage','',"addList" + i );
-            task.span(obj['addList' + i][j]);     
-          //  tick.tickMethod();  
-          function x()
-          {
-         //  tick.el.classList.value='tick1';
-           tick.el.classList.toggle('tick1');
-            let z=tick.el.classList;
-          return z;
-          }
-           let y= tick.el.addEventListener('click',x)
+           // let garbage=new Create('image','garbage','',"addList" + i );
+          // task.span(obj['addList' + i][j]); 
+         
+           var result=obj['addList' + i][j].match(/@/g);
+           var result1=obj['addList' + i][j].replace(/@/g,'');
+            console.log(result1)
+          
+           if(result!==null && result.length%2!==0)
+           {
+            tick.el.classList.toggle('tick1');// ete @-neri qanaky kent 1 kanach guyn e nkarum 
+           }
+          
+         
+           task.span(result1); 
+           tick.tickMethod(); 
+           
+          
+               
+            // inputText=inputText+'@'; 
+            // let z=newArray.length-1;
+            // newArray.splice(z,1,inputText);//vercnum e obj-i addList-i verjin elementy jnjum e ev poxareny nor inputText e dnum
+            // obj[addListId] = newArray;// avelacnum e obj-i mej
+            // localStorage.setItem(boardName, JSON.stringify(obj));// gcum e localStrorage
+            
+       //   }
+        //   let y= tick.el.addEventListener('click',x);
+           
           //  console.log(tick.el.classList);
           //  alert(tick.el.classList.value);
          // console.log(tick.el.classList);
           //console.log(y);
+        
+          
         }
+        
     }
+   
 }
 
 var count = 0;
@@ -132,11 +153,14 @@ function save(id) {
     task.span(inputText);
   //  garbage.button('onclick','deleteTask(id)'); // buton a vra dnum a onclick ev deletTask atributy 
 
-   tick.tickMethod(); //poxum e tick-i classy
+
+//    tick.tickMethod(); //poxum e tick-i classy
+
 
  
     //set in localStorage
     let obj = JSON.parse(localStorage.getItem(boardName));
+   // console.log(obj);
     if (obj.hasOwnProperty(addListId)) {
         var newArray = obj[addListId];
         newArray.push(inputText);
@@ -148,6 +172,17 @@ function save(id) {
         localStorage.setItem(boardName, JSON.stringify(obj));
     }
    
+    function x()
+{
+ tick.el.classList.toggle('tick1');// poxum e tick-i classy
+  inputText=inputText+'@'; 
+  let z=newArray.length-1;//stex bug ka  array 0-erd indexy chi haskanum
+  newArray.splice(z,1,inputText);//vercnum e obj-i addList-i verjin elementy jnjum e ev poxareny nor inputText e dnum
+  obj[addListId] = newArray;// avelacnum e obj-i mej
+  localStorage.setItem(boardName, JSON.stringify(obj));// gcum e localStrorage
+}
+ let y= tick.el.addEventListener('click',x)
+
   
     //  var text=document.querySelectorAll('.list-text');
     // var list=document.querySelectorAll('.addList');
