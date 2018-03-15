@@ -89,6 +89,7 @@ function openCreateBox() {
 
 }
 function deleteList(id){
+
     let deleteList = document.getElementById(id); // vercnume delBtn-i id
     let list=deleteList.parentNode; // gtnum enq list-y
 
@@ -97,7 +98,6 @@ function deleteList(id){
     //from local storage
     var obj = JSON.parse(localStorage.getItem(boardName)); //lokal storage-ic vercnum enq objecty
     let idNum = list.id.replace(/[^0-9]/g, ''); // stanum em addList1... list id-i tivy;
-    console.log(obj);
      delete obj[list.id]; // jnjum enq  listy objecti mijic
      
     ////  Poxum enq addList-i tivy mihatov pakasacnum enq/////////// 
@@ -127,15 +127,17 @@ function save(id) {
     let idNum = id.replace(/[^0-9]/g, '');
     let inputTextId = "addInput" + idNum;
     inputObj.inputText = document.getElementById(inputTextId).value;
+    if(inputObj.inputText!==''){
     inputObj.condition=false;
     let addListId = 'addList' + idNum;
     let task = new Create("span",'list-text' , '', addListId);
     let tick=new Create("img",'tick','',addListId);
     //  let garbage=new Create('image','garbage','', addListId)  avelacnum e garbage-i nkar
+
     task.span(inputObj.inputText);
     //  garbage.button('onclick','deleteTask(id)'); // buton a vra dnum a onclick ev deletTask atributy 
-s
- 
+
+
     //set in localStorage
     let obj = JSON.parse(localStorage.getItem(boardName));
     if (obj.hasOwnProperty(addListId)) {
@@ -150,7 +152,7 @@ s
     }
    
 
-
+    
     tick.el.addEventListener('click',x);
     function x(){
         let objNew= JSON.parse(localStorage.getItem(boardName));
@@ -165,9 +167,10 @@ s
         objNew[addListId].splice(index, 1, inputObj);
          localStorage.setItem(boardName, JSON.stringify(objNew));
       }
+     
 }
 
-
+}
 // function deleteTask(id){
 
 //    garbageImage.addEventListener("click", function deleteTask(){
