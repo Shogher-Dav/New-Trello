@@ -1,7 +1,7 @@
 class Create {
     constructor(elName, identification, count, parent) {
         this.el = document.createElement(elName);
-        this.el.classList.add(identification);
+     this.el.classList.add(identification);
         this.id = identification + count;
         this.el.id = this.id;
         document.getElementById(parent).appendChild(this.el);
@@ -19,14 +19,6 @@ class Create {
 
     
     }
-    tickMethod(){
-
-   function x(){
-         this.el.classList.toggle("tick1");
- }
-  this.el.addEventListener('click',x.bind(this));
-    
-    }
 }
 
 window.onload = getParam;
@@ -38,6 +30,7 @@ function getParam() {
     if (index !== -1) {
         boardName = url.slice(index)
         read();
+       document.getElementById('h1').innerHTML=boardName;
     }
 }
 
@@ -46,42 +39,30 @@ function read() {
     let length = obj['length'];
    
     for (let i = 1; i <= length; i++) {
+        let newArray=obj['addList'+i];
         openCreateBox();
         for (let j = 0; j < obj['addList' + i].length; j++) {
             let task = new Create("SPAN", 'list-text', '', "addList" + i);
-            let tick=new Create('img','tick','',  "addList" + i);
-           // let garbage=new Create('image','garbage','',"addList" + i );
-          // task.span(obj['addList' + i][j]); 
-         
-           var result=obj['addList' + i][j].match(/@/g);
-           var result1=obj['addList' + i][j].replace(/@/g,'');
-            console.log(result1)
-          
-           if(result!==null && result.length%2!==0)
-           {
-            tick.el.classList.toggle('tick1');// ete @-neri qanaky kent 1 kanach guyn e nkarum 
-           }
-          
-         
-           task.span(result1); 
-           tick.tickMethod(); 
-           
-          
-               
-            // inputText=inputText+'@'; 
-            // let z=newArray.length-1;
-            // newArray.splice(z,1,inputText);//vercnum e obj-i addList-i verjin elementy jnjum e ev poxareny nor inputText e dnum
-            // obj[addListId] = newArray;// avelacnum e obj-i mej
-            // localStorage.setItem(boardName, JSON.stringify(obj));// gcum e localStrorage
-            
-       //   }
-        //   let y= tick.el.addEventListener('click',x);
-           
-          //  console.log(tick.el.classList);
-          //  alert(tick.el.classList.value);
-         // console.log(tick.el.classList);
-          //console.log(y);
-        
+            let tick=new Create('img','tick','',  'addList' + i);
+            task.span(obj['addList' + i][j].inputText); 
+
+            if(obj['addList' + i][j].condition===true){
+            tick.el.classList='tick1';
+            }
+            else{
+                tick.el.classList='tick';
+            }
+            tick.el.addEventListener('click',x);
+            function x(){
+                tick.el.classList.toggle('tick1')// poxum e tick-i classy
+                if( obj['addList' + i][j].condition===false) {
+                    obj['addList' + i][j].condition=true;
+                 }
+                else {
+                    obj['addList' + i][j].condition=false;
+                }
+                 localStorage.setItem(boardName, JSON.stringify(obj));
+              }
           
         }
         
@@ -97,8 +78,6 @@ function openCreateBox() {
     //addList
     var list = new Create("DIV", "addList", count, id);
     id = list.id;
-     //  console.log(id);
-
     var input = new Create("INPUT", 'addInput', count, id);
     input.input('text');
 
@@ -121,7 +100,7 @@ function deleteList(id){
     console.log(obj);
      delete obj[list.id]; // jnjum enq  listy objecti mijic
      
-////  Poxum enq addList-i tivy mihatov pakasacnum enq/////////// 
+    ////  Poxum enq addList-i tivy mihatov pakasacnum enq/////////// 
     renameProp =  (
         oldProp,
         newProp,
@@ -143,52 +122,49 @@ function deleteList(id){
 }
 
 function save(id) {
+ 
+    let inputObj={};
     let idNum = id.replace(/[^0-9]/g, '');
     let inputTextId = "addInput" + idNum;
-    let inputText = document.getElementById(inputTextId).value;
+    inputObj.inputText = document.getElementById(inputTextId).value;
+    inputObj.condition=false;
     let addListId = 'addList' + idNum;
-    let task = new Create("span", 'list-text', '', addListId);
+    let task = new Create("span",'list-text' , '', addListId);
     let tick=new Create("img",'tick','',addListId);
-  //  let garbage=new Create('image','garbage','', addListId)  avelacnum e garbage-i nkar
-    task.span(inputText);
-  //  garbage.button('onclick','deleteTask(id)'); // buton a vra dnum a onclick ev deletTask atributy 
-
-
-//    tick.tickMethod(); //poxum e tick-i classy
-
-
+    //  let garbage=new Create('image','garbage','', addListId)  avelacnum e garbage-i nkar
+    task.span(inputObj.inputText);
+    //  garbage.button('onclick','deleteTask(id)'); // buton a vra dnum a onclick ev deletTask atributy 
+s
  
     //set in localStorage
     let obj = JSON.parse(localStorage.getItem(boardName));
-   // console.log(obj);
     if (obj.hasOwnProperty(addListId)) {
         var newArray = obj[addListId];
-        newArray.push(inputText);
+        newArray.push(inputObj);
         obj[addListId] = newArray;
         localStorage.setItem(boardName, JSON.stringify(obj));
     } else {
-        obj[addListId] = [inputText];
+        obj[addListId] = [inputObj];
         obj['length'] += 1;
         localStorage.setItem(boardName, JSON.stringify(obj));
     }
    
-    function x()
-{
- tick.el.classList.toggle('tick1');// poxum e tick-i classy
-  inputText=inputText+'@'; 
-  let z=newArray.length-1;//stex bug ka  array 0-erd indexy chi haskanum
-  newArray.splice(z,1,inputText);//vercnum e obj-i addList-i verjin elementy jnjum e ev poxareny nor inputText e dnum
-  obj[addListId] = newArray;// avelacnum e obj-i mej
-  localStorage.setItem(boardName, JSON.stringify(obj));// gcum e localStrorage
-}
- let y= tick.el.addEventListener('click',x)
 
-  
-    //  var text=document.querySelectorAll('.list-text');
-    // var list=document.querySelectorAll('.addList');
-    // console.log(text);
-    //   dragAndDrop(text,list);
-  
+
+    tick.el.addEventListener('click',x);
+    function x(){
+        let objNew= JSON.parse(localStorage.getItem(boardName));
+        let index=newArray.indexOf(inputObj)
+        tick.el.classList.toggle('tick1')// poxum e tick-i classy
+        if( inputObj.condition===false) {
+           inputObj.condition=true;
+         }
+        else {
+       inputObj.condition=false;
+        }
+        objNew[addListId].splice(index, 1, inputObj);
+         localStorage.setItem(boardName, JSON.stringify(objNew));
+      }
 }
 
 

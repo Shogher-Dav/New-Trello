@@ -15,7 +15,7 @@
     top: 50%;
     left: 50%;
 	transform: 5;
-	transform: translate(-50%, -50%);
+	transform: translate(-100%, -50%);
     background-color: #272727;
     padding: 1rem 1.5rem;
     width: 13rem;
@@ -34,10 +34,12 @@
 	background-color: #353333;
 	border: none;
 	color:white;
+	
 }
 
 .modal-content input:hover{
 	background-color: #1c1d1d;
+	cursor: pointer;
 }
 
 .modal-content a{
@@ -46,12 +48,13 @@
     font-size: 14px;
     text-decoration: none;
     padding: 6px;
-font-weight:800;
+    font-weight:800;
 }
 
 .modal-content a:hover{
 	background-color:#6b6464;
 	color:white;
+	cursor: pointer;
 
 }
 
